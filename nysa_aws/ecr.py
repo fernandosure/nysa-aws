@@ -51,7 +51,7 @@ class EcrRepository(dict):
         ls = [EcrImage(item) for item in rs[u'imageDetails']]
 
         while rs.get(u'nextToken') is not None:
-            rs = self._client.describe_images(nextToken=rs.get(u'nextToken'))
+            rs = self._client.describe_images(repositoryName=self.name, nextToken=rs.get(u'nextToken'))
             ls.extend([EcrImage(item) for item in rs[u'imageDetails']])
         return ls
 
